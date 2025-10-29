@@ -5,6 +5,7 @@ import featuresData from '../../data/featuresData.js'
 import useFeatureActions from '../../hooks/useFeatureActions.js'
 import Loader from '../Common/Loader.jsx'
 import UniversalCmdLineFeature from './UniversalCmdLineFeature.jsx'
+import BorderXFeature from './BorderXFeature.jsx'
 import NetworkSecurity from './NetworkSecurity.jsx'
 import LegalEase from './LegalEase.jsx'
 
@@ -62,7 +63,7 @@ const FeaturePage = () => {
     )
   }
 
-  // Special handling for Network Security feature (ID: 2)
+  // Special handling for BorderX feature (ID: 2)
   if (feature.id === 2) {
     return (
       <div className="feature-page section-padding">
@@ -81,7 +82,7 @@ const FeaturePage = () => {
           </div>
           
           <div className={`feature-content ${isVisible ? 'slide-up' : ''}`}>
-            <NetworkSecurity />
+            <BorderXFeature />
           </div>
         </div>
       </div>

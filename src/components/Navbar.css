@@ -10,8 +10,12 @@
 
 .navbar-content {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between; /* This creates space between logo and nav */
+}
+
+.logo-section {
+  flex: 0 0 auto; /* Don't grow or shrink */
 }
 
 .logo-container {
@@ -31,10 +35,18 @@
   color: var(--text-color);
 }
 
+.nav-section {
+  flex: 0 0 auto; /* Don't grow or shrink */
+  display: flex;
+  align-items: center;
+}
+
 .nav-links {
   display: flex;
   list-style: none;
   gap: 24px;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-link {
@@ -51,13 +63,10 @@
   display: none;
   cursor: pointer;
   color: var(--text-color);
+  margin-left: 16px;
 }
 
 @media (max-width: 768px) {
-  .menu-icon {
-    display: block;
-  }
-  
   .nav-links {
     position: absolute;
     top: 70px;
@@ -78,5 +87,13 @@
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
+  }
+  
+  .menu-icon {
+    display: block;
+  }
+  
+  .navbar-content {
+    justify-content: flex-start; /* Reset for mobile */
   }
 }

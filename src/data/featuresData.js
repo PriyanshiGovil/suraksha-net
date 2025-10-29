@@ -10,11 +10,11 @@ const featuresData = [
   },
   {
     id: 2,
-    title: "Endpoint Protection",
-    description: "Advanced security for all your devices including laptops, mobiles, and servers.",
-    icon: "bi-laptop",
-    fullDescription: "Endpoint Protection ensures that all devices connected to your network are secure. This solution includes antivirus, anti-malware, host-based firewall, device control, and application control. It uses behavioral analysis to detect and block zero-day threats before they can compromise your systems.",
-    actions: ["Scan Device", "Update Definitions", "View Quarantine", "Generate Report"]
+    title: "BorderX",
+    description: "Secure communication and steganography for defense operations.",
+    icon: "bi-lock",
+    fullDescription: "BorderX is a secure communication system designed for defense and border forces. It provides offline, end-to-end encrypted messaging and steganographic communication capabilities. The system includes two main components: StegnoChat for secure messaging with channel arming and passphrase protection, and StegEncrypt for hiding messages in images using steganography techniques. BorderX operates entirely offline, ensuring maximum operational security without relying on external networks or infrastructure.",
+    actions: ["Try StegnoChat", "Try StegEncrypt", "Documentation", "Settings"]
   },
   {
     id: 3,
