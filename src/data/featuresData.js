@@ -1,11 +1,12 @@
+// src/data/featuresData.js
 const featuresData = [
   {
-    id: 1,
-    title: "Network Security",
-    description: "Comprehensive protection for your network infrastructure against unauthorized access and attacks.",
-    icon: "bi-hdd-network",
-    fullDescription: "Our Network Security solution provides multi-layered protection for your entire network infrastructure. It includes firewall management, intrusion detection and prevention systems, VPN support, and network segmentation to ensure that your network remains secure against both internal and external threats. With real-time monitoring and automated threat response, your network is always protected.",
-    actions: ["Configure", "Run Scan", "View Report", "Update Rules"]
+   id: 1,
+    title: "Universal Command Line",
+    description: "Convert natural language to command-line instructions with AI-powered intelligence.",
+    icon: "bi-terminal",
+    fullDescription: "Universal Command Line revolutionizes the way users interact with terminal interfaces by converting natural language queries into precise command-line instructions. This powerful tool uses advanced Natural Language Processing (NLP) to understand user intent and provide accurate command translations with confidence scores. Whether you're a beginner learning command-line basics or an experienced user looking for efficiency, Universal Command Line bridges the gap between human language and technical commands, making terminal interactions more intuitive and accessible.",
+    actions: ["Try Now", "View Examples", "Documentation", "Settings"]
   },
   {
     id: 2,
@@ -17,12 +18,13 @@ const featuresData = [
   },
   {
     id: 3,
-    title: "Cloud Security",
-    description: "Secure your cloud infrastructure and applications with our advanced cloud security solutions.",
-    icon: "bi-cloud",
-    fullDescription: "Our Cloud Security solution is designed to protect your cloud infrastructure, applications, and data. It includes cloud workload protection, cloud security posture management, and container security. With support for all major cloud providers, you can maintain consistent security across your hybrid and multi-cloud environments.",
-    actions: ["Assess Security", "Configure Policies", "Run Compliance Check", "View Logs"]
+    title: "LegalEase",
+    description: "Analyze legal documents and privacy policies with AI-powered insights.",
+    icon: "bi-file-earmark-text",
+    fullDescription: "LegalEase is a smart browser extension that automatically analyzes online agreements and privacy policies. It scans the visible content and highlights key clauses using a keyword-based detection system. LegalEase generates easy-to-understand summaries that point out positive aspects like transparency and user rights, as well as negative aspects like data collection and sharing practices. The tool provides an Issues section showing exact sentences that might be risky, enabling users to make informed decisions.",
+    actions: ["Analyze Document", "View History", "Settings", "Help"]
   },
+  
   {
     id: 4,
     title: "Web Application Firewall",

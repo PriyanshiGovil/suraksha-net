@@ -1,3 +1,5 @@
+// src/components/App.jsx
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
@@ -14,6 +16,10 @@ import './components/Features/FeaturePage.css'
 import './components/Common/Loader.css'
 import './components/Dashboard/Dashboard.css'
 import './components/Dashboard/Terminal.css'
+import './components/Features/UniversalCmdLineFeature.css'
+// Remove the problematic imports
+// import "./components/Features/NetworkSecurityFeature.css"
+// import "./components/Features/LegalEaseFeature.css"
 
 function App() {
   return (

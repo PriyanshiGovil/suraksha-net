@@ -1,3 +1,4 @@
+// src/components/Features/FeatureCard.jsx
 import { useState } from 'react'
 
 const FeatureCard = ({ feature }) => {
