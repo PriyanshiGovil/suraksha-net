@@ -1,3 +1,4 @@
+// src/components/Services.jsx
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import featuresData from '../data/featuresData.js'
