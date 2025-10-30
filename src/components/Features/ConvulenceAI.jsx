@@ -1,12 +1,34 @@
-// src/components/Features/ConvulenceAI.jsx
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './ConvulenceAI.css';
 import { motion } from 'framer-motion';
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const ConvulenceAI = () => {
+const ConvulenceAI = ({ inFeaturePage = false }) => {
+  // Check if user is logged in
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  
+  if (!isLoggedIn) {
+    return (
+      <div className="convulenceai-container">
+        <div className="glass-card" style={{ textAlign: "center", padding: "2rem" }}>
+          <h3>Authentication Required</h3>
+          <p>Please log in to access ConvulenceAI</p>
+          <a href="/login" className="tab-btn" style={{ display: "inline-block", marginTop: "1rem" }}>
+            Go to Login
+          </a>
+        </div>
+      </div>
+    );
+  }
+
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [userRole, setUserRole] = useState('Analyst');
+  const [userRole, setUserRole] = useState(() => {
+    // Simulate getting user role from localStorage or context
+    const savedRole = localStorage.getItem("userRole");
+    return savedRole || "Viewer";
+  });
+
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [query, setQuery] = useState('');
@@ -19,6 +41,11 @@ const ConvulenceAI = () => {
     { id: 2, user: 'Analyst42', action: 'Unauthorized attempt', time: '10:34 PM', status: 'alert' },
     { id: 3, user: 'Viewer7', action: 'Downloaded dataset', time: '09:15 AM', status: 'warning' },
   ]);
+
+  // Save role to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem("userRole", userRole);
+  }, [userRole]);
 
   // Mock data for charts
   const departmentData = [
@@ -51,7 +78,7 @@ const ConvulenceAI = () => {
   const handleSendMessage = () => {
     if (newMessage.trim() === '') return;
     
-    const encryptedMessage = btoa(newMessage); // Simple base64 encoding for demo
+    const encryptedMessage = btoa(newMessage);
     const newMsg = {
       id: messages.length + 1,
       text: newMessage,
@@ -63,7 +90,6 @@ const ConvulenceAI = () => {
     setMessages([...messages, newMsg]);
     setNewMessage('');
     
-    // Simulate reply
     setTimeout(() => {
       const reply = {
         id: messages.length + 2,
@@ -79,7 +105,6 @@ const ConvulenceAI = () => {
   const handleQuerySubmit = () => {
     if (query.trim() === '') return;
     
-    // Mock response
     setQueryResponse({
       summary: 'Based on the Q3 financial data, revenue increased by 12% compared to Q2. The main growth drivers were the new product line and expansion into Asian markets.',
       sources: ['Q3 Financial Report.pdf', 'Sales Dashboard.xlsx', 'Market Analysis.pptx'],
@@ -107,7 +132,6 @@ const ConvulenceAI = () => {
   const handleEncodeImage = () => {
     if (!imageFile || !secretMessage) return;
     
-    // In a real implementation, this would use steganography
     alert(`Message "${secretMessage}" has been encoded in ${imageFile.name}`);
     setSecretMessage('');
     setImageFile(null);
@@ -431,7 +455,6 @@ const ConvulenceAI = () => {
         <div className="decoded-message">
           <h4>Decoded Message:</h4>
           <div className="message-output">
-            {/* Decoded message would appear here */}
             <p>No message decoded yet</p>
           </div>
         </div>
@@ -439,115 +462,156 @@ const ConvulenceAI = () => {
     </div>
   );
 
-  const renderMonitoring = () => (
-    <div className="monitoring-container">
-      <h3>Security Monitoring</h3>
-      <div className="logs-container">
-        <div className="logs-header">
-          <div className="log-col">User</div>
-          <div className="log-col">Action</div>
-          <div className="log-col">Time</div>
-          <div className="log-col">Status</div>
+  const renderMonitoring = () => {
+    // Admin and Analyst can access monitoring
+    if (userRole === "Viewer") {
+      return (
+        <div className="glass-card">
+          <h3>Access Denied</h3>
+          <p>You need Analyst or Admin privileges to access Monitoring.</p>
+        </div>
+      );
+    }
+    
+    return (
+      <div className="monitoring-container">
+        <h3>Security Monitoring</h3>
+        <div className="logs-container">
+          <div className="logs-header">
+            <div className="log-col">User</div>
+            <div className="log-col">Action</div>
+            <div className="log-col">Time</div>
+            <div className="log-col">Status</div>
+          </div>
+          
+          <div className="logs-list">
+            {logs.map(log => (
+              <div key={log.id} className="log-item">
+                <div className="log-col">{log.user}</div>
+                <div className="log-col">{log.action}</div>
+                <div className="log-col">{log.time}</div>
+                <div className="log-col">
+                  <span className={`status-badge ${log.status}`}>
+                    {log.status === 'safe' ? 'Safe' : 
+                     log.status === 'warning' ? 'Warning' : 'Alert'}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         
-        <div className="logs-list">
-          {logs.map(log => (
-            <div key={log.id} className="log-item">
-              <div className="log-col">{log.user}</div>
-              <div className="log-col">{log.action}</div>
-              <div className="log-col">{log.time}</div>
-              <div className="log-col">
-                <span className={`status-badge ${log.status}`}>
-                  {log.status === 'safe' ? 'Safe' : 
-                   log.status === 'warning' ? 'Warning' : 'Alert'}
-                </span>
-              </div>
-            </div>
-          ))}
+        <div className="anomaly-stats">
+          <div className="stat-card">
+            <h4>Total Events</h4>
+            <div className="stat-value">1,248</div>
+          </div>
+          <div className="stat-card">
+            <h4>Alerts Today</h4>
+            <div className="stat-value alert">3</div>
+          </div>
+          <div className="stat-card">
+            <h4>Resolved</h4>
+            <div className="stat-value safe">98%</div>
+          </div>
         </div>
       </div>
-      
-      <div className="anomaly-stats">
-        <div className="stat-card">
-          <h4>Total Events</h4>
-          <div className="stat-value">1,248</div>
-        </div>
-        <div className="stat-card">
-          <h4>Alerts Today</h4>
-          <div className="stat-value alert">3</div>
-        </div>
-        <div className="stat-card">
-          <h4>Resolved</h4>
-          <div className="stat-value safe">98%</div>
-        </div>
-      </div>
-    </div>
-  );
+    );
+  };
 
-  const renderSettings = () => (
-    <div className="settings-container">
-      <h3>User Settings</h3>
-      
-      <div className="settings-section">
-        <h4>Role Management</h4>
-        <div className="role-selector">
-          <span>Current Role:</span>
-          <select value={userRole} onChange={(e) => setUserRole(e.target.value)}>
-            <option value="Admin">Admin</option>
-            <option value="Analyst">Analyst</option>
-            <option value="Viewer">Viewer</option>
-          </select>
+  const renderSettings = () => {
+    // Only Admin can access settings
+    if (userRole !== "Admin") {
+      return (
+        <div className="glass-card">
+          <h3>Access Denied</h3>
+          <p>You need Admin privileges to access Settings.</p>
         </div>
-        <p className="role-description">
-          {userRole === 'Admin' ? 'Full access to all features and settings' :
-           userRole === 'Analyst' ? 'Access to analytics and data tools' :
-           'Read-only access to dashboards and reports'}
-        </p>
-      </div>
-      
-      <div className="settings-section">
-        <h4>Appearance</h4>
-        <div className="theme-toggle">
-          <span>Dark Mode</span>
-          <label className="switch">
-            <input type="checkbox" defaultChecked />
-            <span className="slider"></span>
-          </label>
-        </div>
-      </div>
-      
-      <div className="settings-section">
-        <h4>API Configuration</h4>
-        <div className="api-key">
-          <span>API Key:</span>
-          <input type="text" defaultValue="sk-convulence-ai-2023-xxxx" readOnly />
-          <button>Regenerate</button>
-        </div>
-      </div>
-      
-      <div className="settings-section">
-        <h4>Profile Information</h4>
-        <div className="profile-form">
-          <div className="form-group">
-            <label>Name</label>
-            <input type="text" defaultValue="Alex Johnson" />
+      );
+    }
+    
+    return (
+      <div className="settings-container">
+        <h3>User Settings</h3>
+        
+        <div className="settings-section">
+          <h4>Role Management</h4>
+          <div className="role-selector">
+            <span>Current Role:</span>
+            <select value={userRole} onChange={(e) => setUserRole(e.target.value)}>
+              <option value="Admin">Admin</option>
+              <option value="Analyst">Analyst</option>
+              <option value="Viewer">Viewer</option>
+            </select>
           </div>
-          <div className="form-group">
-            <label>Email</label>
-            <input type="email" defaultValue="alex.johnson@company.com" />
+          <p className="role-description">
+            {userRole === 'Admin' ? 'Full access to all features and settings' :
+             userRole === 'Analyst' ? 'Access to analytics and data tools' :
+             'Read-only access to dashboards and reports'}
+          </p>
+        </div>
+        
+        <div className="settings-section">
+          <h4>Appearance</h4>
+          <div className="theme-toggle">
+            <span>Dark Mode</span>
+            <label className="switch">
+              <input type="checkbox" defaultChecked />
+              <span className="slider"></span>
+            </label>
           </div>
-          <div className="form-group">
-            <label>Department</label>
-            <input type="text" defaultValue="Data Analytics" />
+        </div>
+        
+        <div className="settings-section">
+          <h4>API Configuration</h4>
+          <div className="api-key">
+            <span>API Key:</span>
+            <input type="text" defaultValue="sk-convulence-ai-2023-xxxx" readOnly />
+            <button>Regenerate</button>
           </div>
-          <button className="save-profile">Save Changes</button>
+        </div>
+        
+        <div className="settings-section">
+          <h4>Profile Information</h4>
+          <div className="profile-form">
+            <div className="form-group">
+              <label>Name</label>
+              <input type="text" defaultValue="Alex Johnson" />
+            </div>
+            <div className="form-group">
+              <label>Email</label>
+              <input type="email" defaultValue="alex.johnson@company.com" />
+            </div>
+            <div className="form-group">
+              <label>Department</label>
+              <input type="text" defaultValue="Data Analytics" />
+            </div>
+            <button className="save-profile">Save Changes</button>
+            <button 
+              className="save-profile" 
+              style={{ background: "linear-gradient(45deg, #FF5555, #FF9E00)" }}
+              onClick={() => {
+                localStorage.removeItem("userRole");
+                localStorage.removeItem("isLoggedIn");
+                window.location.reload();
+              }}
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="convulenceai-container">
+      {inFeaturePage && (
+        <Link to="/services" className="back-link-top">
+          <i className="bi bi-arrow-left"></i> Back to Services
+        </Link>
+      )}
+      
       <div className="feature-header">
         <motion.div 
           className="feature-icon"

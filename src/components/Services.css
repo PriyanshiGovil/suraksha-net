@@ -1,4 +1,4 @@
-/* --- Styles for the video background --- */
+﻿/* --- Styles for the video background --- */
 
 .services {
   position: relative;
@@ -112,3 +112,16 @@
   opacity: 1;
   transform: translateX(0); /* Slide into view */
 }
+
+/* Display 4 features in a row */
+.services-grid.four-features {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.services-grid.four-features .service-card {
+  flex: 1;
+  min-width: 250px;
+}
+

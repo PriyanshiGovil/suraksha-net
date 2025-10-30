@@ -1,5 +1,4 @@
-// src/components/Features/FeaturePage.jsx
-import { useParams, Link } from 'react-router-dom'
+﻿import { useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import featuresData from '../../data/featuresData.js'
 import useFeatureActions from '../../hooks/useFeatureActions.js'
@@ -8,6 +7,7 @@ import UniversalCmdLineFeature from './UniversalCmdLineFeature.jsx'
 import BorderXFeature from './BorderXFeature.jsx'
 import NetworkSecurity from './NetworkSecurity.jsx'
 import LegalEase from './LegalEase.jsx'
+import ConvulenceAI from './ConvulenceAI.jsx'
 
 const FeaturePage = () => {
   const { featureId } = useParams()
@@ -109,6 +109,19 @@ const FeaturePage = () => {
           
           <div className={`feature-content ${isVisible ? 'slide-up' : ''}`}>
             <LegalEase />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Special handling for ConvulenceAI feature (ID: 4)
+  if (feature.id === 4) {
+    return (
+      <div className="feature-page section-padding">
+        <div className="container">
+          <div className={`feature-content ${isVisible ? 'slide-up' : ''}`}>
+            <ConvulenceAI inFeaturePage={true} />
           </div>
         </div>
       </div>
