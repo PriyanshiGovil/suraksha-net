@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { BiMenu, BiX } from "react-icons/bi";
-import logo from "@/assets/logo.png"; // update path if needed
+import logo from "../assets/logo.svg"; // Fixed path and extension
 import "./Navbar.css";
 
 const Navbar = () => {
