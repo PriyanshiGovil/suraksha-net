@@ -17,8 +17,8 @@ import './components/Common/Loader.css'
 import './components/Dashboard/Dashboard.css'
 import './components/Dashboard/Terminal.css'
 import './components/Features/UniversalCmdLineFeature.css'
-import './components/Features/BorderXFeature.css'
-// Remove the problematic imports
+// Removed problematic imports
+// import './components/Features/BorderXFeature.css'
 // import "./components/Features/NetworkSecurityFeature.css"
 // import "./components/Features/LegalEaseFeature.css"
 

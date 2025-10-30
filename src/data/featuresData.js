@@ -16,7 +16,8 @@ const featuresData = [
     fullDescription: "BorderX is a secure communication system designed for defense and border forces. It provides offline, end-to-end encrypted messaging and steganographic communication capabilities. The system includes two main components: StegnoChat for secure messaging with channel arming and passphrase protection, and StegEncrypt for hiding messages in images using steganography techniques. BorderX operates entirely offline, ensuring maximum operational security without relying on external networks or infrastructure.",
     actions: ["Try StegnoChat", "Try StegEncrypt", "Documentation", "Settings"]
   },
-  {
+  {npm run dev
+    
     id: 3,
     title: "LegalEase",
     description: "Analyze legal documents and privacy policies with AI-powered insights.",
