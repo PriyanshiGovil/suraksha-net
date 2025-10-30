@@ -11,22 +11,28 @@
 .navbar-content {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* This creates space between logo and nav */
-}
-
-.logo-section {
-  flex: 0 0 auto; /* Don't grow or shrink */
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 10px;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
 }
 
 .logo {
   height: 40px;
   width: auto;
+  margin-right: 10px;
 }
 
 .logo-text {
@@ -36,7 +42,6 @@
 }
 
 .nav-section {
-  flex: 0 0 auto; /* Don't grow or shrink */
   display: flex;
   align-items: center;
 }
@@ -52,6 +57,7 @@
 .nav-link {
   color: var(--text-color);
   font-weight: 500;
+  text-decoration: none;
   transition: color 0.3s ease;
 }
 
@@ -91,9 +97,5 @@
   
   .menu-icon {
     display: block;
-  }
-  
-  .navbar-content {
-    justify-content: flex-start; /* Reset for mobile */
   }
 }
