@@ -1,23 +1,29 @@
+/* === LANDING.CSS – FINAL UPDATED WITH GLOBE SHIFTED UP === */
+
 /* --- Hero Section --- */
 .hero {
   display: flex;
   align-items: center;
   min-height: 90vh;
+  justify-content: flex-start;
+  padding-left: 5%;
 }
 
-/* This is the 2-column flex container */
+/* Container layout */
 .hero .container {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   align-items: center;
-  gap: 24px; 
+  justify-content: space-between;
+  gap: 80px;
   width: 100%;
 }
 
 /* --- Right Column (Text + Command Center) --- */
 .hero-content {
-  flex: 1; 
+  flex: 1;
   max-width: 600px;
+  padding-right: 5%;
 }
 
 .hero-title {
@@ -46,29 +52,45 @@
 
 /* --- Left Column (Globe) --- */
 .hero-image {
-  flex: 1; 
+  flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   min-width: 0;
+  position: relative;
 }
 
-/* This is the GLOBE's container */
+/* Globe container */
 .globe-container {
-  max-width: 100%;
-  width: 100%;
-  height: 500px; /* Or 60vh */
+  width: 600px;
+  height: 550px;
+  margin-left: -60px; /* Push left */
+  margin-top: -200px;  /* ⬆️ Shift upward */
+  max-width: none;
+  transition: transform 1s ease-in-out;
 }
 
-/* This is the COMMAND CENTER's container */
+.globe-container:hover {
+  transform: scale(1.05);
+}
+
+/* Optional background glow for smoother integration */
+.globe-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(5,191,219,0.15), transparent 70%);
+  pointer-events: none;
+}
+
+/* Dashboard preview */
 .dashboard-preview {
   border-radius: 8px;
   overflow: hidden;
   max-width: 100%;
   box-shadow: 0 10px 30px rgba(5, 191, 219, 0.3);
-  margin-top: 40px; 
+  margin-top: 40px;
 }
-
 
 /* --- FEATURES/SERVICES SECTION --- */
 .section-header {
@@ -97,7 +119,7 @@
 
 .feature-icon {
   font-size: 2.5rem;
-  color: var(--accent-color); 
+  color: var(--accent-color);
   margin-bottom: 16px;
 }
 
@@ -110,29 +132,42 @@
   color: rgba(234, 234, 234, 0.8);
 }
 
-
 /* --- MOBILE STYLES --- */
 @media (max-width: 992px) {
-  
-  .hero .container {
-    flex-direction: column; 
-    text-align: center;
+  .hero {
+    justify-content: center;
+    padding-left: 0;
   }
-  
+
+  .hero .container {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+
   .hero-content {
     max-width: 100%;
-    order: 2; 
+    order: 2;
+    padding-right: 0;
   }
-  
+
   .hero-image {
-    order: 1; 
-    width: 100%; 
+    order: 1;
+    width: 100%;
+    justify-content: center;
   }
-  
+
+  .globe-container {
+    width: 90%;
+    height: auto;
+    margin-left: 0;
+    margin-top: -40px; /* Still slightly up on mobile */
+  }
+
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .hero-buttons {
     justify-content: center;
   }
